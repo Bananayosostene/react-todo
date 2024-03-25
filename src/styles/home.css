@@ -63,7 +63,7 @@ body{
     background-color: var(--headings);
 } */
 .update{
-color: #004ba8;
+color: var(--text-color);
 font-size: 30px;
 }
 .delete{
@@ -143,16 +143,20 @@ input {
 }
 
 button {
-  padding: 10px;
-  border-radius: 5px;
+  padding: 5px;
+  border-radius: 5px 5px 0 0;
   border: none;
-  background-color: #007bff;
-  color: white;
+  border: 1px var(--text-color) solid;
+  color: var(--text-color);
+  background-color: var(--main-color);
   cursor: pointer;
+}
+.button{
+  height: 2rem;
 }
 
 button:hover {
-  background-color: #0056b3;
+  box-shadow: 0 0 5px var(--text-color);
 }
 .in{
     display: flex;
@@ -161,11 +165,10 @@ button:hover {
 }
 .in p{
  font-size: 15px;
- color: #0056b3;
  cursor: pointer;
 }
 .in p:hover{
-    color:  #0056b3;
+ font-size: 16px;
 }
 
 
@@ -192,4 +195,12 @@ button:hover {
 .update-text{
   display: flex;
   gap: 1rem;
+}
+.cancel{
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.cancel p{
+  cursor: pointer;
 }

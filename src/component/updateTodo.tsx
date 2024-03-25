@@ -83,7 +83,10 @@ const UpdateTodo: React.FC<Props> = ({
       />
         </div>
         </div>
-      <button onClick={handleUpdate}>Update</button>
+        <div className="cancel">
+          <button className="button" onClick={handleUpdate}>Update</button>
+          <p onClick={onUpdate}>Cancel</p>
+        </div>
     </div>
     </div>
   );

@@ -156,7 +156,7 @@ const Home: React.FC = () => {
             <p>My Todo App in React TSX</p>
           </div>
           {isLoggedIn && (
-            <button className="login" onClick={handleLogout}>
+            <button className="button" onClick={handleLogout}>
               logout
             </button>
           )}
@@ -198,7 +198,10 @@ const Home: React.FC = () => {
                 <p>{todo.dueDate}</p>
               </div>
               <div className="action">
-                <FaEdit className="update" onClick={() => handleUpdateClick(todo)}/>
+                <FaEdit
+                  className="update"
+                  onClick={() => handleUpdateClick(todo)}
+                />
                 <RiDeleteBin2Line
                   className="delete"
                   onClick={() => handleDeleteTodo(todo._id)}
