@@ -23,7 +23,7 @@ const Login: React.FC<Props> = ({ handlemodal }) => {
   const {
     register,
     handleSubmit,
-    // formState: { errors },
+    formState:{errors}
   } = useForm<FormData>();
 
   const onsubmit: SubmitHandler<FormData> = async (data) => {
@@ -57,22 +57,34 @@ const Login: React.FC<Props> = ({ handlemodal }) => {
     <div className="modal">
       {Signup && <SignUp handleSignUp={handleSignUp} />}
       <div className="modal-content">
-        <h2>Login</h2>
+        <div className="in">
+          <h2>Login</h2>
+          <p onClick={handleSignUp}>Create account</p>
+        </div>
         <form onSubmit={handleSubmit(onsubmit)}>
           <div>
             <input
+              className="text "
               type="email"
               placeholder="Email"
               {...register("email", { required: true })}
             />
+            {errors.email && (
+              <p style={{ color: "red", fontSize: "12px" }}>invalid email</p>
+            )}
           </div>
-          <div className="pass">
+          <div>
             <input
+              className="text "
               type="password"
               placeholder="Password"
               {...register("password", { required: true })}
             />
-            <p onClick={handleSignUp}>Create account</p>
+            {errors.password && (
+              <p style={{ color: "red", fontSize: "12px" }}>
+                enter correct password
+              </p>
+            )}
           </div>
           <button type="submit">Login</button>
         </form>

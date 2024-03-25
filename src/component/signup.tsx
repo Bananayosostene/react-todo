@@ -10,6 +10,7 @@ const SignUp: React.FC<SignUpProps> = ({ handleSignUp }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+
   const createAccount = async () => {
     try {
       const response = await fetch(
@@ -44,6 +45,7 @@ const SignUp: React.FC<SignUpProps> = ({ handleSignUp }) => {
         <h2>Sign Up</h2>
         <div>
           <input
+            className="text "
             type="text"
             placeholder="Username"
             value={username}
@@ -53,6 +55,7 @@ const SignUp: React.FC<SignUpProps> = ({ handleSignUp }) => {
         </div>
         <div>
           <input
+            className="text "
             type="email"
             placeholder="Email"
             value={email}
@@ -62,6 +65,7 @@ const SignUp: React.FC<SignUpProps> = ({ handleSignUp }) => {
         </div>
         <div className="pass">
           <input
+            className="text "
             type="password"
             placeholder="Password"
             value={password}

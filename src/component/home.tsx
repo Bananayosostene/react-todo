@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "../styles/home.css";
 import Login from "./login";
+import UpdateTodo from "./updateTodo";
+import { RiDeleteBin2Line } from "react-icons/ri";
+import { FaEdit } from "react-icons/fa";
 
 interface Todo {
   _id: string;
@@ -11,8 +14,8 @@ interface Todo {
 
 const Home: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(
-    localStorage.getItem("loginStatus") ? true : false
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(
+    !!localStorage.getItem("loginStatus")
   );
   const [newTodo, setNewTodo] = useState<Todo>({
     _id: "",
@@ -20,9 +23,11 @@ const Home: React.FC = () => {
     description: "",
     dueDate: "",
   });
+  const [selectedTodo, setSelectedTodo] = useState<Todo | null>(null);
+  const [modal, setModal] = useState<boolean>(false);
 
   useEffect(() => {
-    setIsLoggedIn(localStorage.getItem("loginStatus") ? true : false);
+    setIsLoggedIn(!!localStorage.getItem("loginStatus"));
   }, []);
 
   useEffect(() => {
@@ -63,7 +68,6 @@ const Home: React.FC = () => {
         try {
           const { _id, ...todoData } = newTodo;
           _id
-
           const response = await fetch(
             "https://todo-backend-pjp6.onrender.com/todo/task/post",
             {
@@ -72,7 +76,7 @@ const Home: React.FC = () => {
                 "Content-Type": "application/json",
                 Authorization: `bearer ${localStorage.getItem("token")}`,
               },
-              body: JSON.stringify(todoData), 
+              body: JSON.stringify(todoData),
             }
           );
 
@@ -122,13 +126,18 @@ const Home: React.FC = () => {
     }
   };
 
-  const [modal, setModal] = useState(false);
+  const handleUpdateClick = (todo: Todo) => {
+    setSelectedTodo(todo);
+  };
+
+  const handleUpdateSuccess = () => {
+    setSelectedTodo(null);
+    fetchTodos();
+  };
 
   const handleModal = () => {
     setModal(!modal);
   };
-
-  const loggedIn = localStorage.getItem("token");
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -143,15 +152,13 @@ const Home: React.FC = () => {
       <div className="inner-container">
         <div className="nav">
           <div>
-            <h1>Sostene</h1>
+            <h1 className="logo">Sostene</h1>
             <p>My Todo App in React TSX</p>
           </div>
-          {loggedIn ? (
+          {isLoggedIn && (
             <button className="login" onClick={handleLogout}>
               logout
             </button>
-          ) : (
-            <>{/* <button onClick={handleModal}> Login</button> */}</>
           )}
         </div>
         <div className="inputs" id="inputs">
@@ -181,9 +188,6 @@ const Home: React.FC = () => {
         <button className="button add" id="add" onClick={handleAddTodo}>
           Add Todo
         </button>
-        <button className="button updating" id="update">
-          Update Todo
-        </button>
         <hr />
         <ul>
           {todos.map((todo) => (
@@ -194,18 +198,25 @@ const Home: React.FC = () => {
                 <p>{todo.dueDate}</p>
               </div>
               <div className="action">
-                <button className="button update">Update</button>
-                <button
-                  className="button delete"
+                <FaEdit className="update" onClick={() => handleUpdateClick(todo)}/>
+                <RiDeleteBin2Line
+                  className="delete"
                   onClick={() => handleDeleteTodo(todo._id)}
-                >
-                  Delete
-                </button>
+                />
               </div>
             </li>
           ))}
         </ul>
       </div>
+      {selectedTodo && (
+        <UpdateTodo
+          todoId={selectedTodo._id}
+          title={selectedTodo.title}
+          description={selectedTodo.description}
+          dueDate={selectedTodo.dueDate}
+          onUpdate={handleUpdateSuccess}
+        />
+      )}
     </div>
   );
 };
