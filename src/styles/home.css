@@ -3,7 +3,7 @@
   --main-div-color: #1c1c1c;
   --headings: #983c03;
   --text-color: #ccc;
-  --validate: #D7332F;
+  --validate: #FF0000;
 }
 * {
   text-decoration: none;
@@ -120,7 +120,7 @@ font-size: 30px;
   width: 1rem;
   height: 1rem;
   padding: .7rem;
-  border: 1px var(--text-color) solid;
+  border: none;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -129,6 +129,7 @@ font-size: 30px;
 }
 .close:hover{
   background-color: var(--validate);
+  border: none;
   box-shadow: 0 0 0;
 }
 
