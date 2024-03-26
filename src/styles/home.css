@@ -1,7 +1,7 @@
 :root {
   --main-color: #03010e;
   --main-div-color: #1c1c1c;
-  --headings: #ff6300;
+  --headings: #983c03;
   --text-color: #ccc;
   --validate: #D7332F;
 }
@@ -119,11 +119,17 @@ font-size: 30px;
   float: right; 
   width: 1rem;
   height: 1rem;
+  padding: .7rem;
+  border: 1px var(--text-color) solid;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 50%;
+  border-radius: 0 0;
   cursor: pointer;
+}
+.close:hover{
+  background-color: var(--validate);
+  box-shadow: 0 0 0;
 }
 
 h2 {
@@ -146,7 +152,7 @@ button {
   padding: 5px;
   border-radius: 5px 5px 0 0;
   border: none;
-  border: 1px var(--text-color) solid;
+  border: 1px var(--headings) solid;
   color: var(--text-color);
   background-color: var(--main-color);
   cursor: pointer;
@@ -165,11 +171,10 @@ button:hover {
 }
 .in p{
  font-size: 15px;
+ color: var(--headings);
  cursor: pointer;
 }
-.in p:hover{
- font-size: 16px;
-}
+
 
 
 /* update section */
@@ -203,4 +208,5 @@ button:hover {
 }
 .cancel p{
   cursor: pointer;
+  color: var(--headings);
 }
